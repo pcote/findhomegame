@@ -13,6 +13,14 @@ $(function(){
         this.MAX_WALK_FRAME = 3;
         this.currentDirection = 0;
         this.currentWalkFrame = 0;
+        this.currentXPos = 0;
+        this.currentYPos = 0;
+
+        this.trajectoryMap = [];
+        this.trajectoryMap[this.DIRECTION_DOWN] = {x: 0, y: 50};
+        this.trajectoryMap[this.DIRECTION_UP] = {x: 0, y: -50};
+        this.trajectoryMap[this.DIRECTION_LEFT] = {x: -50, y: 0};
+        this.trajectoryMap[this.DIRECTION_RIGHT] = {x: 50, y: 0};
 
         this.turn = function(newDirection){
             this.currentDirection = newDirection;
@@ -29,9 +37,16 @@ $(function(){
         this.getOffsets = function(){
             var offsets = {
                 walk: this.currentWalkFrame * this.FRAME_WIDTH,
-                direction: this.currentDirection * this.FRAME_HEIGHT
+                direction: this.currentDirection * this.FRAME_HEIGHT,
+                x: this.currentXPos,
+                y: this.currentYPos
             };
             return offsets;
+        };
+
+        this.moveForward = function(){
+            this.currentXPos += this.trajectoryMap[this.currentDirection].x;
+            this.currentYPos += this.trajectoryMap[this.currentDirection].y;
         };
 
     }
@@ -45,18 +60,22 @@ $(function(){
     var buttonActionMap = [];
     buttonActionMap[LEFT_BUTTON] = function(){
         boy.turn(boy.DIRECTION_LEFT);
+        boy.moveForward();
     };
 
     buttonActionMap[RIGHT_BUTTON] = function(){
         boy.turn(boy.DIRECTION_RIGHT);
+        boy.moveForward();
     };
 
     buttonActionMap[UP_BUTTON] = function(){
         boy.turn(boy.DIRECTION_UP);
+        boy.moveForward();
     };
 
     buttonActionMap[DOWN_BUTTON] = function(){
         boy.turn(boy.DIRECTION_DOWN);
+        boy.moveForward();
     };
 
 
@@ -88,12 +107,12 @@ $(function(){
         cxt.drawImage(boyImage,
                       offsets.walk, offsets.direction,
                       boy.FRAME_WIDTH, boy.FRAME_HEIGHT,
-                      0, 0,
+                      offsets.x, offsets.y,
                       boy.FRAME_WIDTH, boy.FRAME_HEIGHT);
     };
 
     var boy = new Sprite();
-    setInterval(pollController, 125);
-    setInterval(animateWalk, 250);
+    setInterval(pollController, 250);
+    setInterval(animateWalk, 200);
 
 });
