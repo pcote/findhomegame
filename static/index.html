@@ -14,14 +14,20 @@
             border: 1px solid black;
             background: url(sprite_sheet_boy.png) 0px 0px;
         }
+
+        #gameCanvas {
+            border: 1px solid black;
+            width: 800px;
+            height: 800px;
+        }
     </style>
 </head>
 <body>
-
+<img id="boyImage" src="sprite_sheet_boy.png" class="hidden" />
 <div class="container">
     <h1>Controller Demo</h1>
     <h3>Requires a real Playstation 3 controller to function. (no generics)</h3>
-    <div class="boy"></div>
+    <canvas id="gameCanvas" width="800px" height="800px"></canvas>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 <script src="app.js"></script>

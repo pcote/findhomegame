@@ -29,7 +29,7 @@ $(function(){
         this.getOffsets = function(){
             var offsets = {
                 walk: this.currentWalkFrame * this.FRAME_WIDTH,
-                direction: -this.currentDirection * this.FRAME_HEIGHT
+                direction: this.currentDirection * this.FRAME_HEIGHT
             };
             return offsets;
         };
@@ -80,9 +80,16 @@ $(function(){
     /**************** Interval callback function for the animation walk cycle **********/
     var animateWalk = function(evt){
         boy.takeStep();
+
         var offsets = boy.getOffsets();
-        var cssString = "url(sprite_sheet_boy.png) " + offsets.walk + "px " + offsets.direction + "px";
-        $(".boy").css("background", cssString);
+        var canv = document.getElementById("gameCanvas");
+        var cxt = canv.getContext("2d");
+        var boyImage = $("#boyImage")[0];
+        cxt.drawImage(boyImage,
+                      offsets.walk, offsets.direction,
+                      boy.FRAME_WIDTH, boy.FRAME_HEIGHT,
+                      0, 0,
+                      boy.FRAME_WIDTH, boy.FRAME_HEIGHT);
     };
 
     var boy = new Sprite();
