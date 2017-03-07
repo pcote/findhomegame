@@ -45,6 +45,9 @@ $(function(){
         };
 
         this.moveForward = function(){
+            var cxt = $("#gameCanvas")[0].getContext("2d");
+            var offsets = this.getOffsets();
+            cxt.clearRect(offsets.x, offsets.y, this.FRAME_WIDTH, this. FRAME_HEIGHT);
             this.currentXPos += this.trajectoryMap[this.currentDirection].x;
             this.currentYPos += this.trajectoryMap[this.currentDirection].y;
         };
@@ -59,6 +62,7 @@ $(function(){
 
     var buttonActionMap = [];
     buttonActionMap[LEFT_BUTTON] = function(){
+
         boy.turn(boy.DIRECTION_LEFT);
         boy.moveForward();
     };
