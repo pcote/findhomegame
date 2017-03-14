@@ -62,7 +62,6 @@ $(function(){
 
     var buttonActionMap = [];
     buttonActionMap[LEFT_BUTTON] = function(){
-
         boy.turn(boy.DIRECTION_LEFT);
         boy.moveForward();
     };
@@ -83,8 +82,11 @@ $(function(){
     };
 
 
+    var gameLogicId;
+    var renderId;
+
     /******** Interval Callback function to poll for button presses. ***********/
-    pollController = function(evt){
+    gameLogic = function(evt){
         var gamepad = navigator.getGamepads()[0];
         if(!gamepad){
             return;
@@ -100,8 +102,9 @@ $(function(){
 
     };
 
+
     /**************** Interval callback function for the animation walk cycle **********/
-    var animateWalk = function(evt){
+    var render = function(evt){
         boy.takeStep();
 
         var offsets = boy.getOffsets();
@@ -116,7 +119,7 @@ $(function(){
     };
 
     var boy = new Sprite();
-    setInterval(pollController, 250);
-    setInterval(animateWalk, 200);
+    gameLogicId = setInterval(gameLogic, 200);
+    renderId = setInterval(render, 200);
 
 });
