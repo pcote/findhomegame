@@ -44,15 +44,14 @@ $(function(){
             return offsets;
         };
 
+
         this.moveForward = function(){
-            var cxt = $("#gameCanvas")[0].getContext("2d");
-            var offsets = this.getOffsets();
-            cxt.clearRect(offsets.x, offsets.y, this.FRAME_WIDTH, this. FRAME_HEIGHT);
             this.currentXPos += this.trajectoryMap[this.currentDirection].x;
             this.currentYPos += this.trajectoryMap[this.currentDirection].y;
         };
 
     }
+
 
     /*********** Action Mappings for controller button presses. *********/
     LEFT_BUTTON = 14;
@@ -105,11 +104,15 @@ $(function(){
 
     /**************** Interval callback function for the animation walk cycle **********/
     var render = function(evt){
+        var  SCREEN_WIDTH = 800;
+        var SCREEN_HEIGHT = 800;
+
         boy.takeStep();
 
         var offsets = boy.getOffsets();
         var canv = document.getElementById("gameCanvas");
         var cxt = canv.getContext("2d");
+        cxt.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         var boyImage = $("#boyImage")[0];
         cxt.drawImage(boyImage,
                       offsets.walk, offsets.direction,
