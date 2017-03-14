@@ -99,6 +99,7 @@ $(function(){
             }
         }
 
+        boy.takeStep();
     };
 
 
@@ -106,8 +107,6 @@ $(function(){
     var render = function(evt){
         var  SCREEN_WIDTH = 800;
         var SCREEN_HEIGHT = 800;
-
-        boy.takeStep();
 
         var offsets = boy.getOffsets();
         var canv = document.getElementById("gameCanvas");
