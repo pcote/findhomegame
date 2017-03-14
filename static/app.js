@@ -17,10 +17,10 @@ $(function(){
         this.currentYPos = 0;
 
         this.trajectoryMap = [];
-        this.trajectoryMap[this.DIRECTION_DOWN] = {x: 0, y: 50};
-        this.trajectoryMap[this.DIRECTION_UP] = {x: 0, y: -50};
-        this.trajectoryMap[this.DIRECTION_LEFT] = {x: -50, y: 0};
-        this.trajectoryMap[this.DIRECTION_RIGHT] = {x: 50, y: 0};
+        this.trajectoryMap[this.DIRECTION_DOWN] = {x: 0, y: 10};
+        this.trajectoryMap[this.DIRECTION_UP] = {x: 0, y: -10};
+        this.trajectoryMap[this.DIRECTION_LEFT] = {x: -10, y: 0};
+        this.trajectoryMap[this.DIRECTION_RIGHT] = {x: 10, y: 0};
 
         this.turn = function(newDirection){
             this.currentDirection = newDirection;
@@ -117,7 +117,7 @@ $(function(){
                       offsets.walk, offsets.direction,
                       boy.FRAME_WIDTH, boy.FRAME_HEIGHT,
                       offsets.x, offsets.y,
-                      boy.FRAME_WIDTH, boy.FRAME_HEIGHT);
+                      Math.round(boy.FRAME_WIDTH / 4), Math.round(boy.FRAME_HEIGHT / 4));
     };
 
     var boy = new Sprite();
